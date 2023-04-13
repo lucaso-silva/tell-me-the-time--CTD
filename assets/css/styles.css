@@ -1,0 +1,44 @@
+@import url("./main.css");
+
+:root {
+    --main-font: 'Mitr', sans-serif;
+    --bg-color: #12137ae5;
+    --display-color: #cac4c471;
+    --white: #f1f1f1;
+    --red: #a52a2a;
+    --black: #010101;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--main-font);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--white);
+}
+
+header, footer {
+    padding: 1.5rem;
+}
+
+footer p, a {
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--white);
+}
+
+a:hover {
+    color: var(--black);
+}
+
+.hide {
+    display: none;
+}

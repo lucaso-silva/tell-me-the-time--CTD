@@ -5,22 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tell me the Time! - Dev. by Lucas Oliveira</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Tell me the time!</h1>
+        <img src="./assets/img/TellmetheTime2.png" alt="Logo" class="logo">
     </header>
-    <section>
-        <div>
-            <input type="text" placeholder="Input a place">
-            <button>Search</button>
+    <section class="container">
+        <div class="display">
+            <div class="input-field">
+                <input type="text" placeholder="Input a place">
+                <button>Search</button>
+            </div>
+            <main class="main-field">
+                <p class="text">It's currently</p>
+                <p class="time">09:26pm</p>
+                <p class="text">in New Westminster - CA</p>
+            </main>
+            <div class="more-info">
+                <p><span>4</span> hours <span>earlier</span> than your current location</p>
+                <button class="new-search">new search</button>
+            </div>
         </div>
-        <main>
-            
-        </main>
     </section>
     <footer>
         <p>Developed by <a href="https://www.linkedin.com/in/lucas-oliveira10/">Lucas Oliveira</a></p>

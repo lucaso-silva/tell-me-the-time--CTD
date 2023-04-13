@@ -1,5 +1,49 @@
-@import url("./main.css");
+.logo {
+    width: 300px;
+}
 
-:root {
-    
+.container{
+    background-image: url("../img/main-bg-img.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    height: 80vh;
+    position: relative;
+}
+
+.display {
+    position: absolute;
+    padding: 1.5rem;
+    width: 70%;
+    border-radius: 20px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    background-color: var(--display-color);
+}
+
+.input-field {
+    display: flex;
+}
+
+.main-field{
+    margin-top: .5em;
+}
+
+.time {
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+.new-search {
+    font-family: var(--main-font);
+    background-color: transparent;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.new-search:hover {
+    color: var(--red);
 }

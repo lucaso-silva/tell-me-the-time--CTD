@@ -14,7 +14,7 @@
 
 .display {
     position: absolute;
-    width: 85%;
+    width: 90%;
     border-radius: 20px;
     top: 30%;
     left: 50%;
@@ -22,16 +22,19 @@
 }
 
 .input-field {
-    display: flex;
     background-color: var(--display-color);
     padding: .75rem .5rem;
-    border-radius: 20px;
+    border-radius: 25px;
+}
+
+form {
+    display: flex;
+    justify-content: space-around;
 }
 
 .input {
     border: none;
-    /* border-bottom: .12rem solid var(--white); */
-    padding: .5rem;
+    padding: .5rem 0 .5rem 1.25rem;
     background-color: transparent;
     color: var(--white);
     font-size: 1rem;
@@ -42,23 +45,42 @@
     font-weight: 300;
     color: var(--white);
     font-size: 1.125rem;
+    padding-left: 1rem;
 }
 
 .search {
     border: .125rem solid var(--white);
     border-radius: 20px;
     background-color: transparent;
-    padding: .5rem .75rem;
+    padding: .5rem .85rem;
     color: var(--white);
+    font-family: var(--main-font);
+    font-weight: 400;
+    transition: all .75s;
+    text-transform: uppercase;
+}
+
+.search:hover {
+    border: .125rem solid var(--red);
+    color: var(--yellow);
+    font-size: .95rem;
 }
 
 .main-field{
-    margin-top: .5em;
+    margin-left: 1.5em;
 }
 
 .time {
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 2rem;
+    margin: .25rem 0;
+}
+
+.more-info {
+    margin-top: 2rem;
+    font-size: 1rem;
+    text-align: right;
+    padding: 0 .5rem;
 }
 
 .new-search {
@@ -67,8 +89,113 @@
     border: none;
     font-size: 1.25rem;
     font-weight: 400;
+    text-shadow: var(--yellow) 1px 0 10px;
 }
 
 .new-search:hover {
     color: var(--red);
+    font-size: 1.35rem;
+}
+
+@media screen and (min-width: 768px) {
+    .display {
+        top: 40%;
+        width: 55%;
+    }
+
+    .text {
+        font-size: 1.35rem;
+    }
+
+    .time {
+        font-size: 2.5rem;
+    }
+
+    .more-info {
+        font-size: 1.25rem;
+    }
+
+    .new-search {
+        margin-top: 1rem;
+        font-size: 1.45rem;
+    }
+
+    .new-search:hover {
+        font-size: 1.55rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .input {
+        font-size: 1.5rem;
+    }
+
+    .input::placeholder {
+        font-size: 1.5rem;
+    }
+
+    .search {
+        font-size: 1.125rem;
+    }
+
+    .text {
+        font-size: 2rem;
+    }
+
+    .time {
+        font-size: 3.75rem;
+        margin: .65rem 0;
+    }
+
+    .more-info {
+        margin-top: 2.5rem;
+        font-size: 1.75rem;
+    }
+
+    .new-search {
+        margin-top: 1.25rem;
+        font-size: 1.75rem;
+    }
+
+    .new-search:hover {
+        font-size: 1.9rem;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .input {
+        font-size: 2.125rem;
+    }
+
+    .input::placeholder {
+        font-size: 2.125rem;
+    }
+
+    .search {
+        font-size: 1.5rem;
+    }
+
+    .display {
+        width: 45%;
+    }
+
+    .text {
+        font-size: 2.25rem;
+    }
+
+    .time {
+        font-size: 4.25rem;
+    }
+
+    .more-info {
+        font-size: 2rem;
+    }
+
+    .new-search {
+        font-size: 2.25rem;
+    }
+
+    .new-search:hover {
+        font-size: 2.4rem;
+    }
 }

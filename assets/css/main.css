@@ -14,17 +14,42 @@
 
 .display {
     position: absolute;
-    padding: 1.5rem;
-    width: 70%;
+    width: 85%;
     border-radius: 20px;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -40%);
-    background-color: var(--display-color);
 }
 
 .input-field {
     display: flex;
+    background-color: var(--display-color);
+    padding: .75rem .5rem;
+    border-radius: 20px;
+}
+
+.input {
+    border: none;
+    /* border-bottom: .12rem solid var(--white); */
+    padding: .5rem;
+    background-color: transparent;
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.input::placeholder {
+    font-family: var(--main-font);
+    font-weight: 300;
+    color: var(--white);
+    font-size: 1.125rem;
+}
+
+.search {
+    border: .125rem solid var(--white);
+    border-radius: 20px;
+    background-color: transparent;
+    padding: .5rem .75rem;
+    color: var(--white);
 }
 
 .main-field{

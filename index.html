@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
+
 <body>
     <header>
         <img src="./assets/img/TellmetheTime2.png" alt="Logo" class="logo">
@@ -18,13 +20,15 @@
     <section class="container">
         <div class="display">
             <div class="input-field">
-                <input type="text" placeholder="Input a place">
-                <button>Search</button>
+                <form>
+                    <input type="text" placeholder="Input a place" class="input" required>
+                    <button class="search">Search</button>
+                </form>
             </div>
             <main class="main-field">
                 <p class="text">It's currently</p>
                 <p class="time">09:26pm</p>
-                <p class="text">in New Westminster - CA</p>
+                <p class="text">in <span class="place"></span></p>
             </main>
             <div class="more-info">
                 <p><span>4</span> hours <span>earlier</span> than your current location</p>
@@ -35,5 +39,8 @@
     <footer>
         <p>Developed by <a href="https://www.linkedin.com/in/lucas-oliveira10/">Lucas Oliveira</a></p>
     </footer>
+
+    <script src="./assets/js/main.js"></script>
 </body>
+
 </html>

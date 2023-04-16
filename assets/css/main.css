@@ -48,6 +48,10 @@ form {
     padding-left: 1rem;
 }
 
+.input-error::placeholder {
+    color: var(--red);
+}
+
 .search {
     border: .125rem solid var(--white);
     border-radius: 20px;

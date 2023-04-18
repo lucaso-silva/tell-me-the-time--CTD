@@ -6,6 +6,8 @@ const mainField = document.querySelector(".main-field");
 const moreInfo = document.querySelector(".more-info");
 const newSearch = document.querySelector(".new-search");
 
+// const myApiKey = config.TZ_API_KEY;
+
 
 //Functions
 async function getPositionInfo(place) {
@@ -19,7 +21,20 @@ async function getPositionInfo(place) {
   const longitude = data[0].lon;
   console.log(latitude)
   console.log(longitude);
+
+  return latitude, longitude;
 };
+
+async function getTimeZone(latitude, longitude) {
+  const timeUrl = `https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
+  
+  const resp = await fetch(timeUrl);
+  const data = await resp.json();
+
+  const timeZone = data.zoneName; 
+  console.log(timeZone);
+}
+
 
 //Events
 search.addEventListener("click", (e) => {
@@ -32,6 +47,7 @@ search.addEventListener("click", (e) => {
   } else {
 
     getPositionInfo(inputValue);
+    getTimeZone(latitude, longitude);
 
     place.innerHTML = inputValue;
     input.setAttribute("placeholder", "Input a place");

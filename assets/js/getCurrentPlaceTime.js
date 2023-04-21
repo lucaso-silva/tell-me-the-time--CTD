@@ -1,62 +1,60 @@
 const myApiKey = config.TZ_API_KEY;
+const place = "Vancouver"
+let latitude;
+let longitude;
 
-const getCurrentPlaceTime = async (place) => {
+const url1 = `https://geocode.maps.co/search?q={${place}}`
 
-    const response = await fetch(`https://geocode.maps.co/search?q={${place}}`);
-    const data = await response.json()
-    
-    const latitude = data[0].lat;
-    const longitude = data[0].lon;
 
-    return latitude, longitude;
-    // console.log("Lat: " + latitude, "long: " + longitude);
+const placePosition = fetch(url1)
 
-}
-
-//     return latitude, longitude
-
-//   } catch (err) {
-//     console.log(err);
-
-//   }
-// };
-
-const getTimeZone = async(latitude, longitude) => {
-    const timeUrl = `https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
-  
-    const resp = await fetch(timeUrl);
-    const data = await resp.json();
-  
-    const zoneName = data.zoneName; 
-    console.log(zoneName);
-  
-    return zoneName;
-}
-
-const getCurrentTime = (zoneName) => {
-    const currentPlaceTime = new Date().toLocaleTimeString("en-US", {timeZone: `${zoneName}`});
-    // return currentPlaceTime;
-    console.log(currentPlaceTime);
-}
-
-getCurrentPlaceTime("Recife").then((response) => {
+placePosition
+.then((response) => {
   if(!response.ok) {
     throw new Error(`HTTP error: ${response.status}`);
   }
   return response.json();
 })
+.then((data) => {
+  latitude = data[0].lat;
+  longitude = data[0].lon;
 
-.then((latitude, longitude) =>{
-  getTimeZone(latitude,longitude).then((response)=>{
-    if(!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    } else {
-      return response.json();
-    }
-  })
+  console.log(latitude, longitude);
+  return latitude, longitude;
+})
+.catch((error) => {
+  console.error(`Não foi possivel obter produtos: ${error}`);
 })
 
-.then((zoneName)=>{
-  getCurrentTime(zoneName);
+const timeZone = fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${placePosition.latitude}&lng=${placePosition.longitude}`);
 
+timeZone
+.then((response) => {
+  if(!response.ok) {
+    throw new Error(`HTTP error: ${response.status}`);
+  }
+  return response.json();
 })
+.then((data) => {
+  const zoneName = data.zoneName;
+  
+  const currentTime = new Date().toLocaleTimeString("en-US", {timeZone: `${zoneName}`});
+  console.log(currentTime);
+
+}) 
+
+
+// currentPlaceTime.then((response) => {
+//   const currentTime = new Date().toLocaleTimeString("en-US", {timeZone: `${zoneName}`});
+//   console.log(currentTime);
+// })
+
+Promise.all([placePosition, timeZone])
+.then((responses) => {
+  for (const response of responses) {
+    console.log(`${response.url}: ${response.status}`)
+  }
+})
+.catch((error) => {
+  console.error(`Falha ao buscar: ${error}`)
+});

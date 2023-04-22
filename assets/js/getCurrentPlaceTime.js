@@ -1,10 +1,10 @@
-const myApiKey = config.TZ_API_KEY;
-const place = "Vancouver"
-let latitude;
-let longitude;
+// const myApiKey = config.TZ_API_KEY;
+const place = "Maceio"
+let latitude = 51.5072
+let longitude = -0.1275
 
 const url1 = `https://geocode.maps.co/search?q={${place}}`
-
+const url2 = `https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
 
 const placePosition = fetch(url1)
 
@@ -26,7 +26,7 @@ placePosition
   console.error(`Não foi possivel obter produtos: ${error}`);
 })
 
-const timeZone = fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${placePosition.latitude}&lng=${placePosition.longitude}`);
+const timeZone = fetch(url2);
 
 timeZone
 .then((response) => {
@@ -42,12 +42,6 @@ timeZone
   console.log(currentTime);
 
 }) 
-
-
-// currentPlaceTime.then((response) => {
-//   const currentTime = new Date().toLocaleTimeString("en-US", {timeZone: `${zoneName}`});
-//   console.log(currentTime);
-// })
 
 Promise.all([placePosition, timeZone])
 .then((responses) => {

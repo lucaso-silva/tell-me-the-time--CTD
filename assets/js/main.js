@@ -6,76 +6,56 @@ const mainField = document.querySelector(".main-field");
 const time = document.querySelector(".time-info");
 const moreInfo = document.querySelector(".more-info");
 const newSearch = document.querySelector(".new-search");
-// let latitude;
-// let longitude;
-// let timeInfo;
 
-// const myApiKey = config.TZ_API_KEY;
+const myApiKey = config.TZ_API_KEY;
 
-function getTimeInformation(inputValue) {
-  const url1 = `https://geocode.maps.co/search?q={${inputValue}}`;
-  const url2 = `https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
-  const placePosition = fetch(url1);
+//Functions
+async function getPlacePosition(placeName) {
+  const url1 = `https://geocode.maps.co/search?q={${placeName}}`;
 
-  placePosition
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      latitude = data[0].lat;
-      longitude = data[0].lon;
-
-      console.log(latitude, longitude);
-      return latitude, longitude;
-    })
-    .catch((error) => {
-      console.error(`Não foi possivel obter produtos: ${error}`);
-    });
-
-  const timeZone = fetch(url2);
-
-  timeZone
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const zoneName = data.zoneName;
-
-      const currentTime = new Date().toLocaleTimeString("en-US", {
-        timeZone: `${zoneName}`,
-      });
-      console.log(currentTime);
-      const timeInfo = currentTime;
-      console.log(typeof timeInfo);
-      return timeInfo;
-    });
-
-  Promise.all([placePosition, timeZone])
-    .then((responses) => {
-      for (const response of responses) {
-        console.log(`${response.url}: ${response.status}`);
-      }
-    })
-    .catch((error) => {
-      console.error(`Falha ao buscar: ${error}`);
-    });
+  const response = await fetch(url1);
+  const data = await response.json();
+  // console.log(data);
+  return data;
 }
 
-async function replaceInfo(inputValue, timeInfo) {
-  place.innerHTML = await inputValue;
+async function getTimeZoneName(data) {
+  const newData = await data;
+  const latitude = newData[0].lat;
+  const longitude = newData[0].lon;
+
+  // console.log(latitude, longitude);
+
+  const url2 = `https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
+  const resp = await fetch(url2);
+  const data2 = await resp.json();
+  
+  const placeName = data2.cityName;
+  const zoneName = data2.zoneName;
+  
+  // console.log(placeName)
+  place.innerHTML = placeName;
+  // console.log(zoneName);
+  return zoneName;
+}
+
+async function getPlaceTime(zoneName) {
+  const timeZone = await zoneName;
+  const currentPlaceTime = new Date().toLocaleTimeString("en-US", {
+    timeZone: `${timeZone}`,
+  });
+  return currentPlaceTime;
+}
+
+async function replaceInfo(timeInfo) {
+  
   time.innerHTML = await timeInfo;
   input.setAttribute("placeholder", "Input a place");
   input.classList.remove("input-error");
   inputField.classList.add("hide");
   mainField.classList.remove("hide");
   moreInfo.classList.remove("hide");
-};
+}
 
 //Events
 search.addEventListener("click", (e) => {
@@ -86,8 +66,12 @@ search.addEventListener("click", (e) => {
     input.classList.add("input-error");
     input.setAttribute("placeholder", "Put a valid place!");
   } else {
-    getTimeInformation(inputValue);
-    replaceInfo(inputValue, timeInfo);
+    getPlaceTime(getTimeZoneName(getPlacePosition(inputValue))).then((resp) => {
+      const currentTime = resp;
+      
+      replaceInfo(currentTime);
+      console.log(currentTime);
+    });
 
     input.value = "";
   }

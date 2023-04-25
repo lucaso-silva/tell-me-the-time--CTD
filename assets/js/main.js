@@ -4,7 +4,6 @@ const place = document.querySelector(".place");
 const inputField = document.querySelector(".input-field");
 const mainField = document.querySelector(".main-field");
 const time = document.querySelector(".time-info");
-const localTimeInfo = document.querySelector(".local-time--info")
 const localTimeSpan = document.querySelector(".local-time");
 const moreInfo = document.querySelector(".more-info");
 const newSearch = document.querySelector(".new-search");
@@ -50,6 +49,9 @@ async function getPlaceTime(zoneName) {
   const currentPlaceTime = new Date().toLocaleTimeString("en-US", {
     timeZone: `${timeZone}`,
   });
+
+  localTimeSpan.innerHTML = getLocalTime();
+
   return currentPlaceTime;
 }
 
@@ -65,7 +67,7 @@ async function replaceInfo(timeInfo) {
 function changeBackgroundImage(term) {
   const photo = `https://source.unsplash.com/1280x720/?${term}`
 
-  console.log(photo); 
+  // console.log(photo); 
 
   backgroundImgContainer.style.backgroundImage = `url("${photo}")`
 }
@@ -75,10 +77,10 @@ function getLocalTime() {
   const localHours = time.getHours();
   const localMinutes = time.getMinutes();
   const localTime = `${localHours}:${localMinutes}`;
-  console.log(typeof localTime);
 
-  localTime.innerText = localTime;
-  localTimeInfo.classList.remove("hide");
+  // console.log(localTime);
+
+  return localTime;
 }
 
 //Events
@@ -104,7 +106,6 @@ search.addEventListener("click", (e) => {
 newSearch.addEventListener("click", () => {
   place.innerHTML = "";
 
-  localTimeInfo.classList.add("hide");
   inputField.classList.remove("hide");
   mainField.classList.add("hide");
   moreInfo.classList.add("hide");

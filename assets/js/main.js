@@ -4,6 +4,8 @@ const place = document.querySelector(".place");
 const inputField = document.querySelector(".input-field");
 const mainField = document.querySelector(".main-field");
 const time = document.querySelector(".time-info");
+const localTimeInfo = document.querySelector(".local-time--info")
+const localTimeSpan = document.querySelector(".local-time");
 const moreInfo = document.querySelector(".more-info");
 const newSearch = document.querySelector(".new-search");
 const backgroundImgContainer = document.querySelector(".container")
@@ -37,6 +39,9 @@ async function getTimeZoneName(data) {
   // console.log(placeName)
   place.innerHTML = placeName;
   // console.log(zoneName);
+
+  changeBackgroundImage(placeName);
+
   return zoneName;
 }
 
@@ -58,11 +63,22 @@ async function replaceInfo(timeInfo) {
 }
 
 function changeBackgroundImage(term) {
-  const photo = `https://source.unsplash.com/1600x900/?${term}`
+  const photo = `https://source.unsplash.com/1280x720/?${term}`
 
   console.log(photo); 
 
   backgroundImgContainer.style.backgroundImage = `url("${photo}")`
+}
+
+function getLocalTime() {
+  const time = new Date();
+  const localHours = time.getHours();
+  const localMinutes = time.getMinutes();
+  const localTime = `${localHours}:${localMinutes}`;
+  console.log(typeof localTime);
+
+  localTime.innerText = localTime;
+  localTimeInfo.classList.remove("hide");
 }
 
 //Events
@@ -75,13 +91,11 @@ search.addEventListener("click", (e) => {
     input.setAttribute("placeholder", "Put a valid place!");
   } else {
     getPlaceTime(getTimeZoneName(getPlacePosition(inputValue))).then((resp) => {
-      const currentTime = resp;
+      const currentPlaceTime = resp;
 
-      replaceInfo(currentTime);
-      // console.log(currentTime);
+      replaceInfo(currentPlaceTime);
+      // console.log(currentPlaceTime);
     });
-
-    changeBackgroundImage(inputValue);
 
     input.value = "";
   }
@@ -90,6 +104,7 @@ search.addEventListener("click", (e) => {
 newSearch.addEventListener("click", () => {
   place.innerHTML = "";
 
+  localTimeInfo.classList.add("hide");
   inputField.classList.remove("hide");
   mainField.classList.add("hide");
   moreInfo.classList.add("hide");

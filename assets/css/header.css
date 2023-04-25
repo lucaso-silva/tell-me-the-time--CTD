@@ -1,0 +1,10 @@
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+.local-time--info {
+    font-size: 1rem;
+    margin-top: .85rem;
+    text-align: right;
+}

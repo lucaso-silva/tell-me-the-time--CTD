@@ -6,6 +6,7 @@ const mainField = document.querySelector(".main-field");
 const time = document.querySelector(".time-info");
 const moreInfo = document.querySelector(".more-info");
 const newSearch = document.querySelector(".new-search");
+const backgroundImgContainer = document.querySelector(".container")
 
 const myApiKey = config.TZ_API_KEY;
 
@@ -29,10 +30,10 @@ async function getTimeZoneName(data) {
   const url2 = `https://api.timezonedb.com/v2.1/get-time-zone?key=${myApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
   const resp = await fetch(url2);
   const data2 = await resp.json();
-  
+
   const placeName = data2.cityName;
   const zoneName = data2.zoneName;
-  
+
   // console.log(placeName)
   place.innerHTML = placeName;
   // console.log(zoneName);
@@ -48,13 +49,20 @@ async function getPlaceTime(zoneName) {
 }
 
 async function replaceInfo(timeInfo) {
-  
   time.innerHTML = await timeInfo;
   input.setAttribute("placeholder", "Input a place");
   input.classList.remove("input-error");
   inputField.classList.add("hide");
   mainField.classList.remove("hide");
   moreInfo.classList.remove("hide");
+}
+
+function changeBackgroundImage(term) {
+  const photo = `https://source.unsplash.com/1600x900/?${term}`
+
+  console.log(photo); 
+
+  backgroundImgContainer.style.backgroundImage = `url("${photo}")`
 }
 
 //Events
@@ -68,10 +76,12 @@ search.addEventListener("click", (e) => {
   } else {
     getPlaceTime(getTimeZoneName(getPlacePosition(inputValue))).then((resp) => {
       const currentTime = resp;
-      
+
       replaceInfo(currentTime);
-      console.log(currentTime);
+      // console.log(currentTime);
     });
+
+    changeBackgroundImage(inputValue);
 
     input.value = "";
   }

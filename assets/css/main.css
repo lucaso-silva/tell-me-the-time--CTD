@@ -19,6 +19,7 @@
     top: 30%;
     left: 50%;
     transform: translate(-50%, -40%);
+    padding: .75rem .25rem;
 }
 
 .input-field {
@@ -46,6 +47,7 @@ form {
     color: var(--white);
     font-size: 1.125rem;
     padding-left: 1rem;
+    text-shadow: 1.75px 1.5px 2px var(--dark-blue)
 }
 
 .input-error::placeholder {
@@ -62,6 +64,7 @@ form {
     font-weight: 400;
     transition: all .75s;
     text-transform: uppercase;
+    text-shadow: 1.75px 1.5px 2px var(--dark-blue)
 }
 
 .search:hover {
@@ -74,17 +77,26 @@ form {
     margin-left: 1.5em;
 }
 
+.text {
+    font-weight: 500;
+    text-shadow: 3px 1.5px 2px var(--dark-blue);
+}
+
 .time {
     font-weight: 700;
     font-size: 2rem;
     margin: .25rem 0;
+    text-shadow: 3px 1.5px 3px var(--black);
 }
 
 .more-info {
+    color: var(--dark-blue);
     margin-top: 2rem;
     font-size: 1rem;
+    font-weight: 500;
     text-align: right;
     padding: 0 .5rem;
+    text-shadow: 1.25px 1.25px 3px var(--display-color);
 }
 
 .new-search {

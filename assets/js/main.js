@@ -1,3 +1,4 @@
+const display = document.querySelector(".display");
 const input = document.querySelector(".input");
 const search = document.querySelector(".search");
 const place = document.querySelector(".place");
@@ -99,6 +100,7 @@ search.addEventListener("click", (e) => {
       // console.log(currentPlaceTime);
     });
 
+    display.style.backgroundColor = "#cac4c471";
     input.value = "";
   }
 });
@@ -106,6 +108,7 @@ search.addEventListener("click", (e) => {
 newSearch.addEventListener("click", () => {
   place.innerHTML = "";
 
+  display.style.backgroundColor = "transparent";
   inputField.classList.remove("hide");
   mainField.classList.add("hide");
   moreInfo.classList.add("hide");

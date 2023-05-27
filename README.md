@@ -1,5 +1,6 @@
 # Tell-me-the-time--CTD
 
+https://github.com/lucaso-silva/tell-me-the-time--CTD/assets/97140968/7b2e7027-7541-4d32-b1b8-2972dd9dbab1
 
 ## Overview
 This application was developed to improve my HTML, CSS, and JavaScript abilities. 
